@@ -166,3 +166,106 @@
                 padding: 10
                 spacing: 10
                 id: dynamic_subjects
+
+
+<subject>:
+    GridLayout:
+        cols: 1
+        rows: 3
+        size: root.width,root.height
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [10, 10]
+            spacing: 10
+            canvas.before:
+                Color:
+                    rgba: 0, 0.6, 0.3, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+           
+
+            Button:
+                id: btn2
+                size_hint_y: None
+                size_hint_x: None
+                width: 60
+                height: 60
+                background_color: (0, 0, 0, 0)
+                canvas.before:
+                    Rectangle:
+                        source: 'assets/arrowb.png'
+                        size: self.width - 10, self.height - 10
+                        pos: self.x + 5, self.y - 6
+                on_press: root.to_grades()
+
+            Widget:
+                size_hint_x: 1
+
+            Image:
+                source: 'assets\startIcon.png' 
+                size_hint: None, None
+                width: 50
+                height: 50
+            
+            Widget:
+                size_hint_x: 1
+
+            Button:
+                id: btn2
+                size_hint_y: None
+                size_hint_x: None
+                width: 67
+                height: 67
+                background_color: (0, 0, 0, 0)
+                canvas.before:
+                    Rectangle:
+                        source: 'assets/logout1.png'
+                        size: self.width - 10, self.height - 10
+                        pos: self.x + 5, self.y - 10
+                on_press: root.manager.current = 'login'
+
+        GridLayout:
+            cols: 1
+            spacing: 2
+            padding: [0,20,0,0]
+            size_hint: (None,None)
+            width: root.width
+            height: 220
+            Label:
+                text: root.subject
+                font_size: 30
+                color: [0, 0, 0, 1]
+                size_hint_y: None
+                size_hint_x: None
+                width: root.width
+                height: 50    
+                halign: 'center'  
+            Label:
+                text: root.main_mark
+                font_size: 30
+                color: root.oa_color
+                size_hint_y: None
+                size_hint_x: None
+                width: root.width
+                height: 50    
+                halign: 'center'  
+
+    ScrollView:
+        size_hint: 1, None
+        height: 420 
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: 10
+            spacing: 10
+            id: dynamic_exams     

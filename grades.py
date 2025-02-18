@@ -41,7 +41,7 @@ def get_grades(sid,pid):
         mark = 0
         mark_count = 0
         for grade in grades_unformatted['data']:
-            if grade['subject'] == sub:
+            if grade['subject'] == sub and float(grade['grade']['mark']['markDisplayValue']) != 0.0:
                 mark += float(grade['grade']['mark']['markDisplayValue'])
                 mark_count += 1
 
@@ -55,12 +55,14 @@ def get_grades(sid,pid):
     counter = 0
     overall = [0,0,0]
     for grade in grades_unformatted['data']:
-      overall[0] += round(float(grade['grade']['mark']['markDisplayValue']),1)
-      if round(float(grade['grade']['mark']['markDisplayValue']),1) >= 6.0:
-          overall[1] += 1
-      else:
-          overall[2] += 1
-      counter += 1
+      if float(grade['grade']['mark']['markDisplayValue']) != 0.0 :
+        overall[0] += round(float(grade['grade']['mark']['markDisplayValue']),1)
+        if round(float(grade['grade']['mark']['markDisplayValue']),1) >= 6.0:
+            overall[1] += 1
+        else:
+            overall[2] += 1
+            print(str(grade))
+        counter += 1
           
     print(("Notenanzahl: ")+str(counter))
     print(f"({str(overall[1])}/{str(overall[2])})")
@@ -95,6 +97,7 @@ class Grades(Screen):
 
         print("Overall Average:"+self.overall_average)
         self.subjects = [{'subject': key, 'grade': value} for key, value in subjects_raw]
+        print("Länge Liste: "+ str(len(self.subjects)))
         container = self.ids.dynamic_subjects
 
 

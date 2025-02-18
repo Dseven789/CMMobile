@@ -34,16 +34,19 @@ def get_subject_grades(sid,pid,subject):
     get_grades = requests.get(f"https://mese.webuntis.com/WebUntis/api/classreg/grade/gradeList?personId={int(pid)}&startDate={str(year)}0905&endDate={str(date)}", cookies=cookies, headers=headers)
     grades_unformatted = get_grades.json()
     for grade in grades_unformatted['data']:
-        if subject == grade['subject']:
+        if subject == grade['subject'] and float(grade['grade']['mark']['markDisplayValue']) != 0.0:
             mark += float(grade['grade']['mark']['markDisplayValue'])
             counter+= 1
             exams.append(grade)
-    mark = round(mark/counter,2)
-    if float(mark) >= 6.0:
-        oa_color = [0, 0.5, 0, 1]
+    if counter != 0:
+        mark = round(mark/counter,2)
+        if float(mark) >= 6.0:
+            oa_color = [0, 0.5, 0, 1]
+        else:
+            oa_color = [1,0,0,1]
+        print(exams)
     else:
-        oa_color = [1,0,0,1]
-    print(exams)
+        oa_color = [0, 0.5, 0, 1] 
     return str(mark),oa_color,exams
         
 
@@ -57,19 +60,44 @@ class Subject(Screen):
         self.main_mark,self.oa_color,exams = get_subject_grades(self.sid,self.pid,self.subject)
         container = self.ids.dynamic_exams
         for exam in exams:
-            label = Label(
-                text =str(exam['grade']['exam']['name']),
-                size_hint_y= None,
-                size_hint_x= None,
-                color = [0,0,0,1],
-                width= self.width,
-                height= 50, 
-                halign= 'center'
+            unformatted_date = str(exam['grade']['date'])
+            date = datetime.strptime(unformatted_date, '%Y%m%d')
+            if float(exam['grade']['mark']['markDisplayValue']) >= 6.0:
+                grade = f"[color=008000]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
+            else:
+                grade = f"[color=FF0000]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
+            size1 = Window.width * 0.05
+            if exam['grade']['text'] == '':
+                exam_name = exam['grade']['examType']['name']
+            else:
+                exam_name = exam['grade']['text']
+            if len(exam_name) <= 43:
+                size2 = Window.width * 0.05
+            elif len(exam_name) <= 62:
+                size2 = Window.width * 0.035
+            elif len(exam_name) <= 72:
+                size2 = Window.width * 0.0275
+            else:
+                size2 = Window.width * 0.0225
+
+            button = Button(
+                text=f"[size={int(size1)}][color=000000FF]{str(date.strftime("%d.%m.%Y"))}"+" : [/color]"+grade+ "[/size]\n" +f"[size={int(size2)}][color=000000FF]{str(exam_name)}[/color][/size]",
+                size_hint_y=None,
+                height=80,
+                markup = True,
+                halign = "left",
+                valign = "middle",
+                background_color = (0.647, 0.576, 0.612, 0.13),
+                width=322
             )
-            container.add_widget(label)
+            container.add_widget(button)
+    
+
         
     def to_grades(self):
         transfer = self.manager.get_screen('grades')
         transfer.sid = self.sid
         transfer.pid = str(self.pid)
+        container = self.ids.dynamic_exams
+        container.clear_widgets()
         self.manager.current='grades'

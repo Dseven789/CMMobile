@@ -19,7 +19,7 @@
             spacing: 10
             canvas.before:
                 Color:
-                    rgba: 0, 0.6, 0.3, 1
+                    rgba: 0.894, 0.424, 0.008, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -28,10 +28,11 @@
                 size_hint_x: 1
 
             Image:
-                source: 'assets\startIcon.png' 
+                source: 'assets\school-20.png' 
                 size_hint: None, None
-                width: 50
-                height: 50
+                width: 60
+                height: 60
+                pos_hint: {'center_y': 0.5}
 
             Widget:
                 size_hint_x: 1
@@ -43,7 +44,14 @@
             padding: [75,140,0,0]
             size_hint: (None,None)
             width: root.width
-            height: 220
+            height: root.height
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            
             TextInput:
                 id: username
                 hint_text: "Untis-Username"
@@ -51,16 +59,20 @@
                 size_hint_x: None
                 width: 350
                 height: 50
-                background_color: (1, 1, 1, 0.8)
+                background_color: (1, 1, 1, 0.2)
+                hint_text_color: (1, 1, 1, 1)
+                foreground_color: (1, 1, 1, 1)
             TextInput:
                 id: pw
                 hint_text: "Untis-Passwort"
                 password: True
+                hint_text_color: (1, 1, 1, 1)
                 size_hint_y: None
                 size_hint_x: None
                 width: 350
                 height: 50
-                background_color: (1, 1, 1, 0.8)
+                background_color: (1, 1, 1, 0.2)
+                foreground_color: (1, 1, 1, 1)
             Button:
                 id: btn1
                 text: "Login"
@@ -68,7 +80,8 @@
                 size_hint_x: None
                 width: 350
                 height: 50
-                background_color: (0, 0.6, 0.3, 0.7)
+                background_color: 0.894, 0.424, 0.008, 1
+                background_normal: ""
                 on_press:
                     root.login()
 
@@ -79,7 +92,7 @@
         size: root.width,root.height
         canvas.before:
             Color:
-                rgba: 1, 1, 1, 1
+                rgba: 0,0,0,1
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -90,7 +103,7 @@
             spacing: 10
             canvas.before:
                 Color:
-                    rgba: 0, 0.6, 0.3, 1
+                    rgba: 0.894, 0.424, 0.008, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -101,15 +114,16 @@
                 size_hint: None, None
                 width: 50
                 height: 50
-
+                pos_hint: {'center_y': 0.5}
             Widget:
                 size_hint_x: 1
 
             Image:
-                source: 'assets\startIcon.png' 
+                source: 'assets\school-20.png' 
                 size_hint: None, None
-                width: 50
-                height: 50
+                width: 60
+                height: 60
+                pos_hint: {'center_y': 0.5}
             
             Widget:
                 size_hint_x: 1
@@ -118,15 +132,16 @@
                 id: btn2
                 size_hint_y: None
                 size_hint_x: None
-                width: 67
-                height: 67
+                width: 60
+                height: 60
                 background_color: (0, 0, 0, 0)
+                pos_hint: {'center_y': 0.5}
                 canvas.before:
                     Rectangle:
                         source: 'assets/logout1.png'
                         size: self.width - 10, self.height - 10
-                        pos: self.x + 5, self.y - 10
-                on_press: root.manager.current = 'login'
+                        pos: self.x, self.y + 1.5
+                on_press: root.logout()
 
         GridLayout:
             cols: 1
@@ -135,6 +150,12 @@
             size_hint: (None,None)
             width: root.width
             height: 220
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             Label:
                 text: root.overall_average
                 font_size: 50
@@ -156,10 +177,22 @@
                 halign: 'center'
 
         ScrollView:
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             size_hint: 1, None
             height: 420 
 
             BoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0,0,0,1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
@@ -175,7 +208,7 @@
         size: root.width,root.height
         canvas.before:
             Color:
-                rgba: 1, 1, 1, 1
+                rgba: 0, 0, 0, 1
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -186,7 +219,7 @@
             spacing: 10
             canvas.before:
                 Color:
-                    rgba: 0, 0.6, 0.3, 1
+                    rgba: 0.894, 0.424, 0.008, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -210,10 +243,12 @@
                 size_hint_x: 1
 
             Image:
-                source: 'assets\startIcon.png' 
+                source: 'assets\school-20.png' 
                 size_hint: None, None
-                width: 50
-                height: 50
+                width: 60
+                height: 60
+                pos_hint: {'center_y': 0.5}
+                
             
             Widget:
                 size_hint_x: 1
@@ -222,14 +257,15 @@
                 id: btn2
                 size_hint_y: None
                 size_hint_x: None
-                width: 67
-                height: 67
+                width: 60
+                height: 60
                 background_color: (0, 0, 0, 0)
+                pos_hint: {'center_y': 0.5}
                 canvas.before:
                     Rectangle:
                         source: 'assets/logout1.png'
                         size: self.width - 10, self.height - 10
-                        pos: self.x + 5, self.y - 10
+                        pos: self.x, self.y + 1.5
                 on_press: root.manager.current = 'login'
 
         GridLayout:
@@ -242,7 +278,7 @@
             Label:
                 text: root.subject
                 font_size: 30
-                color: [0, 0, 0, 1]
+                color: [1, 1, 1, 1]
                 size_hint_y: None
                 size_hint_x: None
                 width: root.width
@@ -258,14 +294,15 @@
                 height: 50    
                 halign: 'center'  
 
-        ScrollView:
-            size_hint: 1, None
-            height: 420 
+            ScrollView:
+                size_hint: 1, None
+                height: 420 
 
-            BoxLayout:
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height
-                padding: 8
-                spacing: 12
-                id: dynamic_exams     
+                BoxLayout:
+                    orientation: 'vertical'
+                    halign: 'left'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: 8
+                    spacing: 12
+                    id: dynamic_exams     

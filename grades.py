@@ -87,7 +87,16 @@ class Grades(Screen):
             transfer1.sid = self.sid
             transfer1.pid = self.pid
             transfer1.subject = subject
+            container = self.ids.dynamic_subjects
+            container.clear_widgets()
             self.manager.current = 'subject'
+    
+    def logout(self):
+        container = self.ids.dynamic_subjects
+        container.clear_widgets()
+        self.manager.current= 'login'
+
+        
     def on_pre_enter(self, *args):
         self.overall_average,self.ratio,subjects_raw=get_grades(self.sid,self.pid)
         if float(self.overall_average) >= 6.0:
@@ -105,6 +114,8 @@ class Grades(Screen):
             button = Button(
                 text=f"{subject['subject']}: {subject['grade']}",
                 size_hint_y=None,
+                background_color=( 0.894, 0.424, 0.008, 1),
+                background_normal= "",
                 height=50,
                 width=320,
                 on_press= partial(self.to_subject, subject= subject['subject'])

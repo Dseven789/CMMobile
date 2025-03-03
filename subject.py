@@ -72,24 +72,27 @@ class Subject(Screen):
             else:
                 exam_name = exam['grade']['text']
             if len(exam_name) <= 43:
-                size2 = Window.width * 0.05
+                size2 = Window.width * 0.03
             elif len(exam_name) <= 62:
-                size2 = Window.width * 0.035
+                size2 = Window.width * 0.03
             elif len(exam_name) <= 72:
-                size2 = Window.width * 0.0275
+                size2 = Window.width * 0.03
             else:
-                size2 = Window.width * 0.0225
+                size2 = Window.width * 0.03
 
             button = Button(
-                text=f"[size={int(size1)}][color=000000FF]{str(date.strftime("%d.%m.%Y"))}"+" : [/color]"+grade+ "[/size]\n" +f"[size={int(size2)}][color=000000FF]{str(exam_name)}[/color][/size]",
+                text=f"[size={int(size1)}][color=FFFFFF]{str(date.strftime("%d.%m.%Y"))}"+" : [/color]"+grade+ "[/size]\n" +f"[size={int(size2)}][color=FFFFFF]{str(exam_name)}[/color][/size]",
                 size_hint_y=None,
-                height=80,
+                height=92,
                 markup = True,
                 halign = "left",
                 valign = "middle",
-                background_color = (0.647, 0.576, 0.612, 0.13),
+                background_color=( 0.894, 0.424, 0.008, 1),
+                background_normal= "",
                 width=322
             )
+            button.text_size = (button.width - 20, None)  # Begrenze den Textbereich
+            button.halign = "left"  # Setzt den Text linksbündig
             container.add_widget(button)
     
 

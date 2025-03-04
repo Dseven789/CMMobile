@@ -47,7 +47,7 @@
             height: root.height
             canvas.before:
                 Color:
-                    rgba: 0,0,0,1
+                    rgba: 0, 0, 0, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -92,7 +92,7 @@
         size: root.width,root.height
         canvas.before:
             Color:
-                rgba: 0,0,0,1
+                rgba: 0.0627, 0.0588, 0.0588, 0.86
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -109,12 +109,20 @@
                     size: self.size
            
 
-            Image:
-                source: 'assets\dabsence.png' 
-                size_hint: None, None
+            Button:
+                id: btn2
+                size_hint_y: None
+                size_hint_x: None
                 width: 50
                 height: 50
+                background_color: (0, 0, 0, 0)
                 pos_hint: {'center_y': 0.5}
+                canvas.before:
+                    Rectangle:
+                        source: 'assets/dabsence.png'
+                        size: self.width - 10, self.height - 10
+                        pos: self.x, self.y + 1.5
+                on_press: root.to_absences()
             Widget:
                 size_hint_x: 1
 
@@ -152,7 +160,7 @@
             height: 220
             canvas.before:
                 Color:
-                    rgba: 0,0,0,1
+                    rgba: 0.0627, 0.0588, 0.0588, 0.86
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -179,7 +187,7 @@
         ScrollView:
             canvas.before:
                 Color:
-                    rgba: 0,0,0,1
+                    rgba: 0.0627, 0.0588, 0.0588, 0.86
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -189,7 +197,7 @@
             BoxLayout:
                 canvas.before:
                     Color:
-                        rgba: 0,0,0,1
+                        rgba: 0.0627, 0.0588, 0.0588, 0.86
                     Rectangle:
                         pos: self.pos
                         size: self.size
@@ -266,7 +274,7 @@
                         source: 'assets/logout1.png'
                         size: self.width - 10, self.height - 10
                         pos: self.x, self.y + 1.5
-                on_press: root.manager.current = 'login'
+                on_press: root.logout()
 
         GridLayout:
             cols: 1
@@ -305,4 +313,112 @@
                     height: self.minimum_height
                     padding: 8
                     spacing: 12
-                    id: dynamic_exams     
+                    id: dynamic_exams    
+
+<absences>:
+    GridLayout:
+        cols: 1
+        rows: 3
+        size: root.width,root.height
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [10, 10]
+            spacing: 10
+            canvas.before:
+                Color:
+                    rgba: 0.894, 0.424, 0.008, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+           
+
+            Button:
+                id: btn2
+                size_hint_y: None
+                size_hint_x: None
+                width: 60
+                height: 60
+                background_color: (0, 0, 0, 0)
+                canvas.before:
+                    Rectangle:
+                        source: 'assets/arrowb.png'
+                        size: self.width - 10, self.height - 10
+                        pos: self.x + 5, self.y - 6
+                on_press: root.to_grades()
+
+            Widget:
+                size_hint_x: 1
+
+            Image:
+                source: 'assets\school-20.png' 
+                size_hint: None, None
+                width: 60
+                height: 60
+                pos_hint: {'center_y': 0.5}
+                
+            
+            Widget:
+                size_hint_x: 1
+
+            Button:
+                id: btn2
+                size_hint_y: None
+                size_hint_x: None
+                width: 60
+                height: 60
+                background_color: (0, 0, 0, 0)
+                pos_hint: {'center_y': 0.5}
+                canvas.before:
+                    Rectangle:
+                        source: 'assets/logout1.png'
+                        size: self.width - 10, self.height - 10
+                        pos: self.x, self.y + 1.5
+                on_press: root.logout()
+
+        GridLayout:
+            cols: 1
+            spacing: 2
+            padding: [0,20,0,0]
+            size_hint: (None,None)
+            width: root.width
+            height: 220
+            Label:
+                text: root.overall_absences
+                font_size: 50
+                markup: True
+                size_hint_y: None
+                color: 0,0,0,1
+                size_hint_x: None
+                width: root.width
+                height: 50    
+                halign: 'center' 
+            Label:
+                text: root.missing_hours
+                font_size: 20
+                markup: True
+                size_hint_y: None
+                color: 1,1,1,1
+                size_hint_x: None
+                width: root.width
+                height: 50    
+                halign: 'center' 
+            
+            ScrollView:
+                size_hint: 1, None
+                height: 420 
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    halign: 'left'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: 8
+                    spacing: 12
+                    id: dynamic_absences       

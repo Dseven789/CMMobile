@@ -104,3 +104,8 @@ class Subject(Screen):
         container = self.ids.dynamic_exams
         container.clear_widgets()
         self.manager.current='grades'
+    
+    def logout(self):
+        container = self.ids.dynamic_exams
+        container.clear_widgets()
+        self.manager.current= 'login'

@@ -1,6 +1,7 @@
 import kivy
 from grades import Grades
 from subject import Subject
+from absences import Absences
 from datetime import datetime, timedelta
 import requests
 from kivy.app import App
@@ -21,8 +22,6 @@ from kivy.properties import ListProperty
 
 Window.size = (400,600)
 
-class absences(Screen):
-    pass
 
 
 class StartApp(App):
@@ -30,7 +29,7 @@ class StartApp(App):
         sm = ScreenManager()
         sm.add_widget(Login(name='login'))
         sm.add_widget(Grades(name='grades'))
-        sm.add_widget(absences(name='absences'))
+        sm.add_widget(Absences(name='absences'))
         sm.add_widget(Subject(name='subject'))
         return sm
 

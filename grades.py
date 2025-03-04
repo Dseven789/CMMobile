@@ -91,6 +91,14 @@ class Grades(Screen):
             container.clear_widgets()
             self.manager.current = 'subject'
     
+    def to_absences(self):
+        transfer = self.manager.get_screen('absences')
+        transfer.sid = self.sid
+        transfer.pid = self.pid
+        container = self.ids.dynamic_subjects
+        container.clear_widgets()   
+        self.manager.current = 'absences'   
+    
     def logout(self):
         container = self.ids.dynamic_subjects
         container.clear_widgets()

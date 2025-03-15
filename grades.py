@@ -124,8 +124,9 @@ class Grades(Screen):
                 size_hint_y=None,
                 background_color=( 0.894, 0.424, 0.008, 1),
                 background_normal= "",
-                height=50,
-                width=320,
+                height=Window.height * 0.08,
+                width= Window.width * 0.8,
+                font_size =Window.height * 0.03,
                 on_press= partial(self.to_subject, subject= subject['subject'])
             )
             container.add_widget(button)

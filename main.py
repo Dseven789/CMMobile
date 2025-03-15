@@ -19,8 +19,8 @@ from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
 from kivy.properties import ListProperty
 
-
-Window.size = (400,600)
+Builder.load_file('classmate.kv')
+Window.size = (400, 807)
 
 
 

@@ -14,7 +14,7 @@ from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
 from kivy.properties import ListProperty
 
-Window.size = (400,600)
+#Window.size = (400,600)
 
 def get_subject_grades(sid,pid,subject):
     headers = {'Content-Type': 'application/json'}
@@ -81,7 +81,7 @@ class Subject(Screen):
                 size2 = Window.width * 0.03
 
             button = Button(
-                text=f"[size={int(size1)}][color=FFFFFF]{str(date.strftime("%d.%m.%Y"))}"+" : [/color]"+grade+ "[/size]\n" +f"[size={int(size2)}][color=FFFFFF]{str(exam_name)}[/color][/size]",
+                text=f"[size={int(size1)}][color=FFFFFF]{str(date.strftime('%d.%m.%Y'))}"+" : [/color]"+grade+ "[/size]\n" +f"[size={int(size2)}][color=FFFFFF]{str(exam_name)}[/color][/size]",
                 size_hint_y=None,
                 height=92,
                 markup = True,

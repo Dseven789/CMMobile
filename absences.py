@@ -65,10 +65,10 @@ class Absences(Screen):
             else:
                 excuse_color = 'FF0000'
             if end_date == start_date:
-                absence_time = f"{str(start_date.strftime("%d.%m.%Y"))}: {str(start_time.strftime("%H:%M"))} - {str(end_time.strftime("%H:%M"))}"
+                absence_time = f"{str(start_date.strftime('%d.%m.%Y'))}: {str(start_time.strftime('%H:%M'))} - {str(end_time.strftime('%H:%M'))}"
             
             else:
-                absence_time = f"{str(start_date.strftime("%d.%m"))}: {str(start_time.strftime("%H:%M"))} - {str(end_date.strftime("%d.%m.%Y"))} : {str(end_time.strftime("%H:%M"))}"
+                absence_time = f"{str(start_date.strftime('%d.%m'))}: {str(start_time.strftime('%H:%M'))} - {str(end_date.strftime('%d.%m.%Y'))} : {str(end_time.strftime('%H:%M'))}"
    
             button = Button(
                 text = f"[size={int(main_size)}][color={excuse_color}]{absence_time}[/color][/size]\n[size={int(second_size)}][color=FFFFFF]{str(absence['text'])}[/color][/size]",

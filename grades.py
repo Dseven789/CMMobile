@@ -72,7 +72,7 @@ def get_grades(sid,pid):
     for average in a:
         print(average)
 
-    return str(main_average),str(f"([color=008000]{overall[1]}[/color]/[color=FF0000]{overall[2]}[/color])"),a
+    return str(main_average),str(f"([color=80FF00]{overall[1]}[/color]/[color=FF3333]{overall[2]}[/color])"),a
     
 class Grades(Screen):
     sid = StringProperty()
@@ -108,9 +108,9 @@ class Grades(Screen):
     def on_pre_enter(self, *args):
         self.overall_average,self.ratio,subjects_raw=get_grades(self.sid,self.pid)
         if float(self.overall_average) >= 6.0:
-            self.oa_color = [0, 0.5, 0, 1]
+            self.oa_color = [0.502, 1.0, 0.0, 1]
         else:
-            self.oa_color = [1,0,0,1]
+            self.oa_color = [1.0, 0.2, 0.2, 1]
 
         print("Overall Average:"+self.overall_average)
         self.subjects = [{'subject': key, 'grade': value} for key, value in subjects_raw]

@@ -41,12 +41,12 @@ def get_subject_grades(sid,pid,subject):
     if counter != 0:
         mark = round(mark/counter,2)
         if float(mark) >= 6.0:
-            oa_color = [0, 0.5, 0, 1]
+            oa_color = [0.502, 1.0, 0.0, 1]
         else:
-            oa_color = [1,0,0,1]
+            oa_color = [1.0, 0.2, 0.2, 1]
         print(exams)
     else:
-        oa_color = [0, 0.5, 0, 1] 
+        oa_color = [0.502, 1.0, 0.0, 1] 
     return str(mark),oa_color,exams
         
 
@@ -63,35 +63,35 @@ class Subject(Screen):
             unformatted_date = str(exam['grade']['date'])
             date = datetime.strptime(unformatted_date, '%Y%m%d')
             if float(exam['grade']['mark']['markDisplayValue']) >= 6.0:
-                grade = f"[color=008000]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
+                grade = f"[color=80FF00]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
             else:
-                grade = f"[color=FF0000]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
+                grade = f"[color=FF3333]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
             size1 = Window.width * 0.05
             if exam['grade']['text'] == '':
                 exam_name = exam['grade']['examType']['name']
             else:
                 exam_name = exam['grade']['text']
             if len(exam_name) <= 43:
-                size2 = Window.width * 0.03
+                size2 = Window.width * 0.035
             elif len(exam_name) <= 62:
-                size2 = Window.width * 0.03
+                size2 = Window.width * 0.035
             elif len(exam_name) <= 72:
-                size2 = Window.width * 0.03
+                size2 = Window.width * 0.035
             else:
-                size2 = Window.width * 0.03
+                size2 = Window.width * 0.035
 
             button = Button(
                 text=f"[size={int(size1)}][color=FFFFFF]{str(date.strftime('%d.%m.%Y'))}"+" : [/color]"+grade+ "[/size]\n" +f"[size={int(size2)}][color=FFFFFF]{str(exam_name)}[/color][/size]",
                 size_hint_y=None,
-                height=92,
+                height=Window.height * 0.12,
                 markup = True,
                 halign = "left",
                 valign = "middle",
                 background_color=( 0.894, 0.424, 0.008, 1),
                 background_normal= "",
-                width=322
+                width = Window.width * 0.9
             )
-            button.text_size = (button.width - 20, None)  # Begrenze den Textbereich
+            button.text_size = (button.width - Window.width * 0.00002, None)  # Begrenze den Textbereich
             button.halign = "left"  # Setzt den Text linksbündig
             container.add_widget(button)
     

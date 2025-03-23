@@ -45,7 +45,7 @@ class Absences(Screen):
 
     def on_pre_enter(self, *args):
         excused,unexcused,absences,self.missing_hours = get_hours(self.pid,self.sid)
-        self.overall_absences =f"([color=008000]{str(excused)}[/color][color=FFFFFF]/[/color][color=FF0000]{str(unexcused)}[/color])"
+        self.overall_absences =f"([color=80FF00]{str(excused)}[/color][color=FFFFFF]/[/color][color=FF3333]{str(unexcused)}[/color])"
         for absence in absences:
             unformatted_start_date = str(absence['startDate'])
             unformatted_end_date = str(absence ['endDate'])
@@ -59,12 +59,12 @@ class Absences(Screen):
             start_time = datetime.strptime(unformatted_start_time,'%H%M')
             end_time = datetime.strptime(unformatted_end_time,'%H%M')
             main_size = Window.width * 0.045
-            second_size = Window.width* 0.03
+            second_size = Window.width* 0.035
             if absence['isExcused'] is True:
-                excuse_color = '008000'
+                excuse_color = '80FF00'
             else:
-                excuse_color = 'FF0000'
-            if end_date == start_date:
+                excuse_color = 'FF3333'
+            if end_date != start_date:
                 absence_time = f"{str(start_date.strftime('%d.%m.%Y'))}: {str(start_time.strftime('%H:%M'))} - {str(end_time.strftime('%H:%M'))}"
             
             else:
@@ -73,15 +73,15 @@ class Absences(Screen):
             button = Button(
                 text = f"[size={int(main_size)}][color={excuse_color}]{absence_time}[/color][/size]\n[size={int(second_size)}][color=FFFFFF]{str(absence['text'])}[/color][/size]",
                 size_hint_y=None,
-                height=92,
+                height= Window.height * 0.15,
                 markup = True,
                 halign = "left",
                 valign = "middle",
                 background_color=( 0.894, 0.424, 0.008, 1),
                 background_normal= "",
-                width=322
+                width= Window.width * 0.9
             )
-            button.text_size = (button.width - 10, None)  # Begrenze den Textbereich
+            button.text_size = (button.width - Window.width * 0.01, None)  # Begrenze den Textbereich
             button.halign = "left"
             container.add_widget(button)
             

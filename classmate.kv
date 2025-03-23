@@ -251,14 +251,15 @@ ScreenManager:
                 id: btn2
                 size_hint_y: None
                 size_hint_x: None
-                width: 60
-                height: 60
+                width: root.height * 0.05
+                height: root.height * 0.05
                 background_color: (0, 0, 0, 0)
+                pos_hint: {'center_y': 0.5}
                 canvas.before:
                     Rectangle:
                         source: 'assets/arrowb.png'
                         size: self.width - 10, self.height - 10
-                        pos: self.x + 5, self.y - 6
+                        pos: self.x + 5, self.y + 1.5
                 on_press: root.to_grades()
 
             Widget:
@@ -267,8 +268,8 @@ ScreenManager:
             Image:
                 source: 'assets/school-20.png' 
                 size_hint: None, None
-                width: 60
-                height: 60
+                width: root.height * 0.1
+                height: root.width * 0.1
                 pos_hint: {'center_y': 0.5}
                 
             
@@ -279,8 +280,8 @@ ScreenManager:
                 id: btn2
                 size_hint_y: None
                 size_hint_x: None
-                width: 60
-                height: 60
+                width: root.width * 0.1
+                height: root.width * 0.1
                 background_color: (0, 0, 0, 0)
                 pos_hint: {'center_y': 0.5}
                 canvas.before:
@@ -299,26 +300,27 @@ ScreenManager:
             height: 220
             Label:
                 text: root.subject
-                font_size: 30
+                font_size: root.height * 0.05
                 color: [1, 1, 1, 1]
                 size_hint_y: None
                 size_hint_x: None
                 width: root.width
-                height: 50    
+                height: root.height * 0.055
                 halign: 'center'  
             Label:
                 text: root.main_mark
-                font_size: 30
+                font_size: root.height * 0.035
                 color: root.oa_color
                 size_hint_y: None
                 size_hint_x: None
                 width: root.width
-                height: 50    
+                height: root.height * 0.05
                 halign: 'center'  
 
             ScrollView:
                 size_hint: 1, None
-                height: 420 
+                height: root.height * 0.75
+                padding: [0,root.height * 0.3,0,0]
 
                 BoxLayout:
                     orientation: 'vertical'
@@ -357,14 +359,15 @@ ScreenManager:
                 id: btn2
                 size_hint_y: None
                 size_hint_x: None
-                width: 60
-                height: 60
+                width: root.height * 0.05
+                height: root.height * 0.05
                 background_color: (0, 0, 0, 0)
+                pos_hint: {'center_y': 0.5}
                 canvas.before:
                     Rectangle:
                         source: 'assets/arrowb.png'
                         size: self.width - 10, self.height - 10
-                        pos: self.x + 5, self.y - 6
+                        pos: self.x + 5, self.y + 1.5
                 on_press: root.to_grades()
 
             Widget:
@@ -373,8 +376,8 @@ ScreenManager:
             Image:
                 source: 'assets/school-20.png' 
                 size_hint: None, None
-                width: 60
-                height: 60
+                width: root.height * 0.1
+                height: root.width * 0.1
                 pos_hint: {'center_y': 0.5}
                 
             
@@ -385,8 +388,8 @@ ScreenManager:
                 id: btn2
                 size_hint_y: None
                 size_hint_x: None
-                width: 60
-                height: 60
+                width:  root.width * 0.1
+                height:  root.width * 0.1
                 background_color: (0, 0, 0, 0)
                 pos_hint: {'center_y': 0.5}
                 canvas.before:
@@ -405,28 +408,28 @@ ScreenManager:
             height: 220
             Label:
                 text: root.overall_absences
-                font_size: 50
+                font_size: root.height * 0.05
                 markup: True
                 size_hint_y: None
                 color: 0,0,0,1
                 size_hint_x: None
                 width: root.width
-                height: 50    
+                height: root.height * 0.07    
                 halign: 'center' 
             Label:
                 text: root.missing_hours
-                font_size: 20
+                font_size: root.height * 0.03
                 markup: True
                 size_hint_y: None
                 color: 1,1,1,1
                 size_hint_x: None
                 width: root.width
-                height: 50    
+                height: root.height * 0.05  
                 halign: 'center' 
             
             ScrollView:
                 size_hint: 1, None
-                height: 420 
+                height: root.height * 0.75
 
                 BoxLayout:
                     orientation: 'vertical'

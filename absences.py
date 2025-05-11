@@ -17,7 +17,16 @@ from kivy.properties import ListProperty
 def get_hours(pid,sid):
     headers = {'Content-Type': 'application/json'}
     cookies =  {'JSESSIONID' : sid}
-    hours_raw = requests.get(f"https://mese.webuntis.com/WebUntis/api/classreg/absencetimes/student?startDate=20240905&endDate=20250613&studentId={int(pid)}&excuseStatusId=-1&excludeAbsences=false&excludeLateness=false",cookies=cookies,headers=headers)
+    date = datetime.today() 
+    year = (datetime.now()).strftime('%Y')
+    year_to_test = int(year)
+    test_date = datetime(year_to_test,9,5)
+    if date < test_date:
+         date = (datetime.now()).strftime('%Y%m%d')
+         year = (datetime.now() - timedelta(days= 365)).strftime('%Y')
+    else:
+        year = (datetime.now()).strftime('%Y')
+    hours_raw = requests.get(f"https://mese.webuntis.com/WebUntis/api/classreg/absencetimes/student?startDate={str(year)}0905&endDate={str(date)}&studentId={int(pid)}&excuseStatusId=-1&excludeAbsences=false&excludeLateness=false",cookies=cookies,headers=headers)
     hours = hours_raw.json()
     absences = []
     excused = 0
@@ -63,7 +72,7 @@ class Absences(Screen):
             if absence['isExcused'] is True:
                 excuse_color = '80FF00'
             else:
-                excuse_color = 'FF3333'
+                excuse_color = 'C62828'
             if end_date != start_date:
                 absence_time = f"{str(start_date.strftime('%d.%m.%Y'))}: {str(start_time.strftime('%H:%M'))} - {str(end_time.strftime('%H:%M'))}"
             

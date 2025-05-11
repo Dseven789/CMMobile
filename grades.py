@@ -27,7 +27,14 @@ def get_grades(sid,pid):
          year = (datetime.now() - timedelta(days= 365)).strftime('%Y')
     else:
         year = (datetime.now()).strftime('%Y')
-    subjects_raw = requests.get(f"https://mese.webuntis.com/WebUntis/api/classreg/grade/grading/list?studentId={int(pid)}&schoolyearId=22",cookies=cookies,headers=headers)
+    yearid = 22
+    if int(year) == 2024:
+        yearid = 22
+    else:
+        difference = int(year) - 2024
+        yearid = 22 + (5*difference)
+        
+    subjects_raw = requests.get(f"https://mese.webuntis.com/WebUntis/api/classreg/grade/grading/list?studentId={int(pid)}&schoolyearId={yearid}",cookies=cookies,headers=headers)
     get_grades = requests.get(f"https://mese.webuntis.com/WebUntis/api/classreg/grade/gradeList?personId={int(pid)}&startDate={str(year)}0905&endDate={str(date)}", cookies=cookies, headers=headers)
     grades_unformatted = get_grades.json()
     subjects_json = subjects_raw.json()
@@ -49,20 +56,24 @@ def get_grades(sid,pid):
             averages[sub] = 0
         else:
             mark = round(mark / mark_count,1)
+            print(sub)
+            print(mark_count)
             averages[sub] = mark
     
     
     counter = 0
     overall = [0,0,0]
     for grade in grades_unformatted['data']:
-      if float(grade['grade']['mark']['markDisplayValue']) != 0.0 :
+      if float(grade['grade']['mark']['markDisplayValue']) != 0.0 and grade['subject'] != None :
         overall[0] += round(float(grade['grade']['mark']['markDisplayValue']),1)
         if round(float(grade['grade']['mark']['markDisplayValue']),1) >= 6.0:
             overall[1] += 1
+
         else:
             overall[2] += 1
             print(str(grade))
         counter += 1
+    print(counter)
           
     print(("Notenanzahl: ")+str(counter))
     print(f"({str(overall[1])}/{str(overall[2])})")
@@ -110,7 +121,7 @@ class Grades(Screen):
         if float(self.overall_average) >= 6.0:
             self.oa_color = [0.502, 1.0, 0.0, 1]
         else:
-            self.oa_color = [1.0, 0.2, 0.2, 1]
+            self.oa_color = [0.78, 0.16, 0.16, 1]
 
         print("Overall Average:"+self.overall_average)
         self.subjects = [{'subject': key, 'grade': value} for key, value in subjects_raw]

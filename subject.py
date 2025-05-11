@@ -65,7 +65,7 @@ class Subject(Screen):
             if float(exam['grade']['mark']['markDisplayValue']) >= 6.0:
                 grade = f"[color=80FF00]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
             else:
-                grade = f"[color=FF3333]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
+                grade = f"[color=C62828]{str(exam['grade']['mark']['markDisplayValue'])}[/color]"
             size1 = Window.width * 0.05
             if exam['grade']['text'] == '':
                 exam_name = exam['grade']['examType']['name']

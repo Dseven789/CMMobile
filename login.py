@@ -73,8 +73,9 @@ class Login(Screen):
        untis_session_id,person_id = authenticate(self.untis_un,self.untis_pw)
        if (untis_session_id == "None"):
            loginerror = Popup(title= "Error",
-                        content= Label(text="Falscher Benutzername oder falsches Passwort!"),
-                        size_hint=(None,None),size=(420,180))
+                        content= Label(text="Falscher Benutzername oder falsches Passwort!",
+                                       font_size = Window.width * 0.04),
+                        size_hint=(None,None),size=(Window.width * 0.9,Window.height * 0.3))
            loginerror.open()
        else:
            transfer = self.manager.get_screen('grades')
